@@ -35,7 +35,7 @@ To compile and run this project, you need:
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/getsban-banking-system.git
+   git clone https://github.com/YSN-B13/getsban-banking-system.git
    ```
 2. Navigate to the project directory:
    ```
