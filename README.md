@@ -35,15 +35,15 @@ To compile and run this project, you need:
 
 1. Clone this repository:
    ```
-   git clone https://github.com/YSN-B13/getsban-banking-system.git
+   git clone https://github.com/YSN-B13/GetsBan.git
    ```
 2. Navigate to the project directory:
    ```
-   cd getsban-banking-system
+   cd GetsBan
    ```
 3. Compile the project:
    ```
-   gcc -o getsban GetsBan.c
+   gcc -o GetsBan GetsBan.c
    ```
 
 ## Usage
