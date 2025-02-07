@@ -66,10 +66,6 @@ Follow the on-screen menu to navigate through different banking operations.
 
 Contributions to improve GetsBan are welcome. Please feel free to fork the repository, make changes, and submit a pull request.
 
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
 ## Disclaimer
 
 This is a basic implementation for educational purposes and should not be used for actual banking operations without significant enhancements in security and reliability.
