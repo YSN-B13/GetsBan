@@ -4,7 +4,8 @@
 
 GetsBan is a simple console-based banking management system implemented in C. It provides basic banking operations such as client management, account creation, transactions, and data persistence. This project is designed to demonstrate fundamental programming concepts in C, including structs, file I/O, and basic security implementations.
 
-## Features
+## Featur
+
 
 - Client Management
   - Add new clients
