@@ -22,7 +22,7 @@ typedef struct {
     int transaction_id;
     int account_number;
     double amount;
-    char type[10]; // 'desposit' or 'withdrawal'
+    char type[10]; 
 } Transaction;
 
 Client clients[MAX_CUSTOMERS];
@@ -43,8 +43,7 @@ void create_Password(Client clients[], int number_of_clients) {
     while (1) {
         printf("Please enter your ID (to create your password) : ");
         scanf("%d", &id);
-
-        // Find the client with the provided ID
+        
         for (int i = 0; i < number_of_clients; i++) {
             if (clients[i].id == id) {
                 client_index = i;
@@ -55,11 +54,10 @@ void create_Password(Client clients[], int number_of_clients) {
         if (client_index == -1) {
             printf("User ID not found. Please enter a valid ID or enter 0 to cancel.\n");
         } else {
-            break; // Break out of the loop if a valid ID is entered
+            break;
         }
     }
-
-    // Loop to prompt for a 4-digit positive integer password
+    
     do {
         printf("Create your 4-digit password : ");
         scanf("%4d", &password);
@@ -92,7 +90,7 @@ void create_Password(Client clients[], int number_of_clients) {
 
         for (int i = 0; i < number_of_clients; i++) {
             if (clients[i].id == id) {
-                // Update the password
+
                 clients[i].password = password;
                 printf("\n");
                 printf("Password created successfully.\n");
@@ -117,7 +115,6 @@ void add_Client() {
     clients[number_of_clients++] = c;
     printf("Client added successfully with ID : %d\n", c.id);
 
-    // Create password for the newly added client
     create_Password(clients, number_of_clients);
 }
 
@@ -129,7 +126,6 @@ int verify_Password(Client clients[], int number_of_clients, int entered_passwor
         printf("please enter your ID (for verify the Password) : ");
         scanf("%d", &id);
 
-        // Find the client with the provided ID
         for (int i = 0; i < number_of_clients; i++) {
             if (clients[i].id == id) {
                 client_index = i;
@@ -141,26 +137,24 @@ int verify_Password(Client clients[], int number_of_clients, int entered_passwor
             printf("User ID not found. Please enter a valid ID or enter 0 to cancel.\n");
             printf("\n");
         } else {
-            break; // Break out of the loop if a valid ID is entered
+            break; 
         }
     }
 
-    int max_attempts = 3; // Maximum number of password verification attempts
+    int max_attempts = 3; 
 
-    // Find the client with the provided ID
     for (int i = 0; i < number_of_clients; i++) {
         if (clients[i].id == id) {
-            int attempts = 0; // Counter for password verification attempts
-
-            // Loop until the correct password is entered or max_attempts is reached
+            int attempts = 0; 
+            
             while (attempts < max_attempts) {
-                // Check if the entered password matches the stored password
+                
                 if (entered_password == clients[i].password) {
                     printf("Password verification successful.\n");
                     printf("\n");
-                    return 1; // Return 1 for successful verification
+                    return 1;
                 } else {
-                    attempts++; // Increment attempts counter
+                    attempts++; 
                     printf("Incorrect password. %d attempts remaining.\n", max_attempts - attempts);
                     printf("\n");
                     printf("Enter your password : ");
@@ -168,11 +162,11 @@ int verify_Password(Client clients[], int number_of_clients, int entered_passwor
                 }
             }
 
-            // If max_attempts is reached without successful verification
+            
             printf("\n");
             printf("Max attempts reached. Access denied.\n");
             printf("\n\n");
-            return 0; // Return 0 for failed verification
+            return 0;
         }
     }
 }
@@ -186,18 +180,16 @@ void create_Account() {
     int id;
     int client_index = -1;
 
-   // Loop until a valid ID is entered
     while (1) {
         printf("Enter your ID to create an account (or enter 0 to cancel) : ");
         scanf("%d", &id);
 
-        // Check if the user entered 0 to cancel
+       
         if (id == 0) {
             printf("Account creation cancelled.\n");
             return;
         }
 
-        // Find the client with the provided ID
         for (int i = 0; i < number_of_clients; i++) {
             if (clients[i].id == id) {
                 client_index = i;
@@ -208,24 +200,22 @@ void create_Account() {
         if (client_index == -1) {
             printf("User ID not found. Please enter a valid ID or enter 0 to cancel.\n");
         } else {
-            break; // Break out of the loop if a valid ID is entered
+            break; 
         }
     }
 
-    // Prompt for password verification
     int entered_password;
     printf("\n");
     printf("Enter your password to proceed : ");
     scanf("%d", &entered_password);
 
-    // Verify the entered password
+    
     if (!verify_Password(clients, number_of_clients, entered_password)) {
         printf("Password verification failed. Access denied.\n");
         printf("\n");
         return;
     }
 
-    // Now you can proceed with creating the account using the provided client's information
     Account a;
     a.client_id = clients[client_index].id;
     a.account_number = number_of_accounts + 1;
@@ -244,18 +234,15 @@ void perform_Transaction() {
     int id;
     int client_index = -1;
 
-    // Loop until a valid ID is entered
     while (1) {
         printf("Enter your ID to perform Transaction (or enter 0 to cancel) : ");
         scanf("%d", &id);
 
-        // Check if the user entered 0 to cancel
         if (id == 0) {
             printf("Transaction cancelled.\n");
             return;
         }
 
-        // Find the client with the provided ID
         for (int i = 0; i < number_of_clients; i++) {
             if (clients[i].id == id) {
                 client_index = i;
@@ -267,17 +254,15 @@ void perform_Transaction() {
             printf("User ID not found. Please enter a valid ID or enter 0 to cancel.\n");
             printf("\n");
         } else {
-            break; // Break out of the loop if a valid ID is entered
+            break; 
         }
     }
 
-    // Prompt for password verification
     int entered_password;
     printf("\n");
     printf("Enter your password to proceed: ");
     scanf("%d", &entered_password);
 
-    // Verify the entered password
     if (!verify_Password(clients, number_of_clients, entered_password)) {
         printf("Password verification failed. Access denied.\n");
         printf("\n");
@@ -329,19 +314,16 @@ void perform_Transaction() {
 void display_Client_Details() {
     int id;
     int client_index = -1;
-
-    // Loop until a valid ID is entered
+    
     while (1) {
         printf("Enter your ID to display your Details (or enter 0 to cancel)  : ");
         scanf("%d", &id);
 
-        // Check if the user entered 0 to cancel
         if (id == 0) {
             printf("display Details cancelled.\n");
             return;
         }
 
-        // Find the client with the provided ID
         for (int i = 0; i < number_of_clients; i++) {
             if (clients[i].id == id) {
                 client_index = i;
@@ -353,17 +335,15 @@ void display_Client_Details() {
             printf("User ID not found. Please enter a valid ID or enter 0 to cancel.\n");
             printf("\n");
         } else {
-            break; // Break out of the loop if a valid ID is entered
+            break;
         }
     }
 
-    // Prompt for password verification
     int entered_password;
     printf("\n");
     printf("Enter your password to proceed : ");
     scanf("%d", &entered_password);
 
-    // Verify the entered password
     if (!verify_Password(clients, number_of_clients, entered_password)) {
         printf("Password verification failed. Access denied.\n");
         printf("\n");
@@ -387,18 +367,18 @@ void display_Account_Details() {
     int id;
     int client_index = -1;
 
-    // Loop until a valid ID is entered
+    
     while (1) {
         printf("Enter your ID to display your Account Details (or enter 0 to cancel) : ");
         scanf("%d", &id);
 
-        // Check if the user entered 0 to cancel
+        l
         if (id == 0) {
             printf("Display cancelled.\n");
             return;
         }
 
-        // Find the client with the provided ID
+        
         for (int i = 0; i < number_of_clients; i++) {
             if (clients[i].id == id) {
                 client_index = i;
@@ -410,17 +390,15 @@ void display_Account_Details() {
             printf("User ID not found. Please enter a valid ID or enter 0 to cancel.\n");
             printf("\n");
         } else {
-            break; // Break out of the loop if a valid ID is entered
+            break; 
         }
     }
 
-    // Prompt for password verification
     int entered_password;
     printf("\n");
     printf("Enter your password to proceed : ");
     scanf("%d", &entered_password);
 
-    // Verify the entered password
     if (!verify_Password(clients, number_of_clients, entered_password)) {
         printf("Password verification failed. Access denied.\n");
         printf("\n");
@@ -445,19 +423,16 @@ void display_Account_Details() {
 void display_Transaction_History(int account_number) {
     int id;
     int client_index = -1;
-    // Loop until a valid ID is entered
-
+    
     while (1) {
         printf("Enter your ID to view your transaction history (or enter 0 to cancel) : ");
         scanf("%d", &id);
 
-        // Check if the user entered 0 to cancel
         if (id == 0) {
             printf("Transaction history view cancelled.\n");
             return;
         }
 
-        // Find the client with the provided ID
         for (int i = 0; i < number_of_clients; i++) {
             if (clients[i].id == id) {
                 client_index = i;
@@ -469,17 +444,16 @@ void display_Transaction_History(int account_number) {
             printf("User ID not found. Please enter a valid ID or enter 0 to cancel.\n");
             printf("\n");
         } else {
-            break; // Break out of the loop if a valid ID is entered
+            break; 
         }
     }
 
-    // Prompt for password verification
+
     int entered_password;
     printf("\n");
     printf("Enter your password to proceed : ");
     scanf("%d", &entered_password);
 
-    // Verify the entered password
     if (!verify_Password(clients, number_of_clients, entered_password)) {
         printf("Password verification failed. Access denied.\n");
         printf("\n");
@@ -508,18 +482,15 @@ void delete_Account(int account_number) {
     int id;
     int client_index = -1;
 
-    // Loop until a valid ID is entered
     while (1) {
         printf("Enter your ID to delete your account (or enter 0 to cancel): ");
         scanf("%d", &id);
 
-        // Check if the user entered 0 to cancel
         if (id == 0) {
             printf("Account deletion cancelled.\n");
             return;
         }
 
-        // Find the client with the provided ID
         for (int i = 0; i < number_of_clients; i++) {
             if (clients[i].id == id) {
                 client_index = i;
@@ -530,16 +501,14 @@ void delete_Account(int account_number) {
         if (client_index == -1) {
             printf("User ID not found. Please enter a valid ID or enter 0 to cancel.\n");
         } else {
-            break; // Break out of the loop if a valid ID is entered
+            break; 
         }
     }
 
-    // Prompt for password verification
     int entered_password;
     printf("Enter your password to proceed: ");
     scanf("%d", &entered_password);
 
-    // Verify the entered password
     if (!verify_Password(clients, number_of_clients, entered_password)) {
         printf("Password verification failed. Access denied.\n");
         return;
@@ -556,18 +525,16 @@ void delete_Account(int account_number) {
 
     if (index != -1) {
 
-        // Delete transactions associated with this account
         for (int i = 0; i < number_of_transactions; i++) {
             if (transactions[i].account_number == account_number) {
                 for (int j = i; j < number_of_transactions - 1; j++) {
                     transactions[j] = transactions[j + 1];
                 }
                 number_of_transactions--;
-                i--; // to revisit the deleted transaction in the loop
+                i--; 
             }
         }
 
-        // Delete the found account
         for (int i = index; i < number_of_accounts - 1; i++) {
             accounts[i] = accounts[i + 1];
         }
@@ -584,18 +551,15 @@ void delete_Client(int client_id) {
     int id;
     int client_index = -1;
 
-    // Loop until a valid ID is entered
     while (1) {
         printf("Enter your ID to delete you from clients (or enter 0 to cancel): ");
         scanf("%d", &id);
 
-        // Check if the user entered 0 to cancel
         if (id == 0) {
             printf("Client deletion cancelled.\n");
             return;
         }
 
-        // Find the client with the provided ID
         for (int i = 0; i < number_of_clients; i++) {
             if (clients[i].id == id) {
                 client_index = i;
@@ -606,16 +570,14 @@ void delete_Client(int client_id) {
         if (client_index == -1) {
             printf("User ID not found. Please enter a valid ID or enter 0 to cancel.\n");
         } else {
-            break; // Break out of the loop if a valid ID is entered
+            break; 
         }
     }
 
-    // Prompt for password verification
     int entered_password;
     printf("Enter your password to proceed: ");
     scanf("%d", &entered_password);
 
-    // Verify the entered password
     if (!verify_Password(clients, number_of_clients, entered_password)) {
         printf("Password verification failed. Access denied.\n");
         return;
@@ -630,13 +592,11 @@ void delete_Client(int client_id) {
 
     if (index != -1) {
 
-        // Delete the found client
         for (int i = index; i < number_of_clients - 1; i++) {
             clients[i] = clients[i + 1];
         }
         number_of_clients--;
 
-        // Delete all accounts associated with the client
         for (int i = 0; i < number_of_accounts; i++) {
             if (accounts[i].client_id == client_id) {
                 delete_Account(accounts[i].account_number);
