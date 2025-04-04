@@ -22,7 +22,7 @@ typedef struct {
     int transaction_id;
     int account_number;
     double amount;
-    char type[10]; // "deposit' or 'withdrawal'
+    char type[10]; // 'deposit' or 'withdrawal'
 } Transaction;
 
 Client clients[MAX_CUSTOMERS];
